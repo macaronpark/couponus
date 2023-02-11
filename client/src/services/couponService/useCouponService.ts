@@ -2,22 +2,22 @@ import { trpc } from "../../utils/trpc";
 
 const useCouponService = () => {
   const queryIssuedList = () => {
-    const result = trpc.issuedList.useQuery();
+    const result = trpc.coupon.issuedList.useQuery();
     return result;
   };
 
   const queryReceivedList = () => {
-    const result = trpc.receivedList.useQuery();
+    const result = trpc.coupon.receivedList.useQuery();
     return result;
   };
 
   const issue = () => {
-    const result = trpc.issue.useMutation();
+    const result = trpc.coupon.issue.useMutation();
     return result;
   };
 
   const use = () => {
-    const result = trpc.use.useMutation();
+    const result = trpc.coupon.use.useMutation();
     return result;
   };
 

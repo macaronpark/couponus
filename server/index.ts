@@ -1,68 +1,31 @@
-import { initTRPC } from "@trpc/server";
-import { createHTTPHandler } from "@trpc/server/adapters/standalone";
+import { inferAsyncReturnType, initTRPC } from "@trpc/server";
+import { CreateHTTPContextOptions, createHTTPHandler } from "@trpc/server/adapters/standalone";
 import http from "http";
-import { z } from "zod";
 
-const t = initTRPC.create();
+import { couponRouter } from "./routers/couponRouter";
 
-const router = t.router;
-const publicProcedure = t.procedure;
+function createContext(opts: CreateHTTPContextOptions) {
+  return {};
+}
+
+type Context = inferAsyncReturnType<typeof createContext>;
+
+const t = initTRPC.context<Context>().create();
+export type T = typeof t;
+
+export const publicProcedure = t.procedure;
+export const router = t.router;
 
 const appRouter = router({
-  issuedList: publicProcedure.query(() => {
-    return [
-      {
-        id: "issued-1",
-        title: "집안일 1회권",
-        issuedAt: "20220218T15:33:00",
-        expiredAt: null,
-        isUsed: false,
-      },
-      {
-        id: "issued-2",
-        title: "집안일 1회권",
-        issuedAt: "20220220T10:02:00",
-        expiredAt: null,
-        isUsed: false,
-      },
-    ];
-  }),
-  receivedList: publicProcedure.query(() => {
-    return [
-      {
-        id: "received-1",
-        title: "집안일 1회권",
-        issuedAt: "20220218T15:33:00",
-        expiredAt: null,
-        isUsed: false,
-      },
-    ];
-  }),
-  issue: publicProcedure
-    .input(z.object({ title: z.string(), expiredAt: z.date() }))
-    .mutation(({ input }) => {
-      return {
-        id: "id",
-        title: input.title,
-        issuedAt: new Date(),
-        expiredAt: input.expiredAt,
-        isUsed: false,
-      };
-    }),
-  use: publicProcedure.input(z.object({ id: z.string() })).mutation(({ input }) => {
-    return {
-      id: input.id,
-      isUsed: false,
-    };
-  }),
+  coupon: couponRouter(t),
 });
 
 export type AppRouter = typeof appRouter;
 
 const handler = createHTTPHandler({
   router: appRouter,
-  createContext() {
-    console.log("context 3");
+  createContext({ req, res }) {
+    console.log(`[${res.statusCode}] ${req.method}${" "}${req.url}${" "}`);
     return {};
   },
 });
