@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
-import { useState } from "react";
-import IndexPage from "./routes/IndexPage";
-import { trpc } from "./utils/trpc";
+import { trpc } from "@utils/trpc";
+import { Route, Routes } from "react-router-dom";
+import IndexPage from "@routes/IndexPage";
+import LoginPage from "@routes/LoginPage";
 
 const App = () => {
   const [queryClient] = useState(() => new QueryClient());
@@ -19,7 +21,10 @@ const App = () => {
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
-        <IndexPage />
+        <Routes>
+          <Route path="/" element={<IndexPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
       </QueryClientProvider>
     </trpc.Provider>
   );

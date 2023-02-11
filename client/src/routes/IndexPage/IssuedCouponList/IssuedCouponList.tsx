@@ -1,5 +1,5 @@
-import styles from "./IssuedCouponList.module.css";
-import useCouponService from "../../../services/couponService/useCouponService";
+import styles from "./IssuedCouponList.module.scss";
+import useCouponService from "@services/couponService/useCouponService";
 
 const IssuedCouponList = () => {
   const { couponService } = useCouponService();
