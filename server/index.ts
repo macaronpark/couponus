@@ -2,7 +2,7 @@ import { inferAsyncReturnType, initTRPC } from "@trpc/server";
 import { CreateHTTPContextOptions, createHTTPHandler } from "@trpc/server/adapters/standalone";
 import http from "http";
 
-import { couponRouter } from "./routers/couponRouter";
+import { couponRouter } from "./src/routers/couponRouter";
 
 function createContext(opts: CreateHTTPContextOptions) {
   return {};

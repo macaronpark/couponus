@@ -2,12 +2,12 @@ import { trpc } from "../../utils/trpc";
 
 const useCouponService = () => {
   const queryIssuedList = () => {
-    const result = trpc.coupon.issuedList.useQuery();
+    const result = trpc.coupon.issuedList.useQuery({ userId: "user-szpark" });
     return result;
   };
 
   const queryReceivedList = () => {
-    const result = trpc.coupon.receivedList.useQuery();
+    const result = trpc.coupon.receivedList.useQuery({ userId: "user-szpark" });
     return result;
   };
 

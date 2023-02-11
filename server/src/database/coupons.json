@@ -1,0 +1,24 @@
+{
+  "coupons": [
+    {
+      "id": "coupon-0",
+      "title": "집안일 1회권",
+      "desc": "",
+      "issuedAt": "2023-02-11T07:27:35.928Z",
+      "expiredAt": "2028-02-11T07:27:35.928Z",
+      "isUsed": false,
+      "issuerId": "user-szpark",
+      "receiverId": "user-hcmoon"
+    },
+    {
+      "id": "coupon-1",
+      "title": "test",
+      "desc": "test-desc",
+      "issuedAt": "2/11/2023, 8:20:12 PM",
+      "expiredAt": "2099-02-11T07:27:35.928Z",
+      "isUsed": false,
+      "issuerId": "user-szpark",
+      "receiverId": "user-hcmoon"
+    }
+  ]
+}
