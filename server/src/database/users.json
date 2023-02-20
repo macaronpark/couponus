@@ -2,11 +2,13 @@
   "users": [
     {
       "id": "user-szpark",
-      "username": "szpark"
+      "username": "szpark",
+      "password": "szpark"
     },
     {
       "id": "user-hcmoon",
-      "username": "hcmoon"
+      "username": "hcmoon",
+      "password": "hcmoon"
     }
   ]
 }

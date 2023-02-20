@@ -6,7 +6,7 @@ interface ReadArgs {
   onError?: () => void;
 }
 
-export const read = ({ fileName, onError }: ReadArgs): Coupon[] => {
+export const read = <T>({ fileName, onError }: ReadArgs): T[] => {
   let data;
 
   try {

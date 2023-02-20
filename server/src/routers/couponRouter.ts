@@ -1,15 +1,16 @@
 import { publicProcedure, T } from "../..";
 import { z } from "zod";
 import { read, write } from "../database/utils";
+import { Coupon } from "../interfaces/coupon";
 
 export const couponRouter = (t: T) =>
   t.router({
     issuedList: publicProcedure.input(z.object({ userId: z.string() })).query(({ input }) => {
-      const data = read({ fileName: "coupons" });
+      const data = read({ fileName: "coupons" }) as Coupon[];
       return data.filter((coupon) => coupon.issuerId === input.userId);
     }),
     receivedList: publicProcedure.input(z.object({ userId: z.string() })).query(({ input }) => {
-      const data = read({ fileName: "coupons" });
+      const data = read({ fileName: "coupons" }) as Coupon[];
       return data.filter((coupon) => coupon.receiverId === input.userId);
     }),
     issue: publicProcedure
@@ -23,7 +24,7 @@ export const couponRouter = (t: T) =>
         })
       )
       .mutation(({ input }) => {
-        const data = read({ fileName: "coupons" });
+        const data = read({ fileName: "coupons" }) as Coupon[];
 
         const newCoupon = {
           id: `coupon-${data.length}`,
@@ -44,7 +45,7 @@ export const couponRouter = (t: T) =>
     use: publicProcedure
       .input(z.object({ userId: z.string(), couponId: z.string() }))
       .mutation(({ input }) => {
-        const data = read({ fileName: "coupons" });
+        const data = read({ fileName: "coupons" }) as Coupon[];
         const targetCoupon = data.find(
           (coupon) =>
             coupon.id === input.couponId &&
